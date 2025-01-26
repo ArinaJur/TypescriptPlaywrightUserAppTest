@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sun Jan 26 18:17:47 GMT 2025","Sun Jan 26 18:17:47 GMT 2025","428","chromium","navigationUI.spec.ts","Navigation tabs are available","","","TC-NavBar-1: Verify Search Tab Load Correctly And Available",""
+"passed","Sun Jan 26 18:17:13 GMT 2025","Sun Jan 26 18:17:47 GMT 2025","33731","chromium","navigationUI.spec.ts","Navigation tabs are available","","","TC-NavBar-1: Verify Add Tab Load Correctly And Available",""
+"passed","Sun Jan 26 18:17:52 GMT 2025","Sun Jan 26 18:17:53 GMT 2025","829","webkit","navigationUI.spec.ts","Navigation tabs are available","","","TC-NavBar-1: Verify Search Tab Load Correctly And Available",""
+"passed","Sun Jan 26 18:17:49 GMT 2025","Sun Jan 26 18:17:50 GMT 2025","550","firefox","navigationUI.spec.ts","Navigation tabs are available","","","TC-NavBar-1: Verify Search Tab Load Correctly And Available",""
+"passed","Sun Jan 26 18:17:51 GMT 2025","Sun Jan 26 18:17:52 GMT 2025","922","webkit","navigationUI.spec.ts","Navigation tabs are available","","","TC-NavBar-1: Verify Add Tab Load Correctly And Available",""
+"passed","Sun Jan 26 18:17:48 GMT 2025","Sun Jan 26 18:17:49 GMT 2025","1227","firefox","navigationUI.spec.ts","Navigation tabs are available","","","TC-NavBar-1: Verify Add Tab Load Correctly And Available",""
