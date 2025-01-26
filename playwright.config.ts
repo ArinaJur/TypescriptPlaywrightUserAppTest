@@ -36,7 +36,6 @@ export default defineConfig({
     ['list'],
     ['json', { outputFile: 'reports/json-report/report.json' }],
     ['html', { outputFolder: 'reports/html-report/', open: 'never' }],
-
     ['junit', { outputFile: 'reports/junit-report/report.xml' }],
     ['@estruyf/github-actions-reporter'],
     ['monocart-reporter', { name: "Monocart Report", outputFile: 'reports/monocart-report/index.html'}],
