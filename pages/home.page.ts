@@ -11,9 +11,5 @@ export class HomePage {
 
     async clickSearchTab() {
         await this.searchTab.click();
-
-        // return new SearchPage(this.page);
     }
-
-
 }
