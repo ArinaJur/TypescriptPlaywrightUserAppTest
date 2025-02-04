@@ -8,13 +8,14 @@ import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
+  tsconfig: './tsconfig.json',
   testDir: './tests',
 
   testIgnore: 'template*',
   outputDir:'./reports/test-results',
-  timeout: 20 * 1000,
+  timeout: 10 * 1000,
   expect: {
-    timeout: 5 * 1000
+    timeout: 2 * 1000
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
@@ -56,6 +57,7 @@ export default defineConfig({
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
     ignoreHTTPSErrors: true,
+    testIdAttribute: 'id',
   },
   projects: [
     {

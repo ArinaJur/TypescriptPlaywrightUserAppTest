@@ -1,19 +1,12 @@
-import { test, expect, request, APIRequestContext} from "@playwright/test";
+import { test, expect} from "@base/base.page";
 import * as preconditions from "@preconditions/preconditions"
 import * as data from "@data/users.data"
+import {HomePage} from "@pages/home.page";
+import {SearchPage} from "@pages/search.page";
 
 test.describe('Should Search Users By Search Criteria', async () => {
-    let apiRequest: APIRequestContext;
 
-    test.beforeEach('Create API Request Context, Create Preconditions', async({ page }) => {
-        apiRequest = await request.newContext();
-        await preconditions.deleteUsers(apiRequest);
-        await preconditions.createUsers(apiRequest, data.users);
-
-        await page.goto('/');
-    })
-
-    test('Search User With Unique First Name', async({ page }) => {
+    test('Search User With Unique First Name', async({ page, forEachTest, createDB }) => {
         const searchTab = page.getByRole('link', {name: 'Search', exact: true});
         const tableRow = page.locator("tbody>tr");
         const firstNamePlaceholder = page.getByPlaceholder("Enter first name...");
@@ -44,7 +37,7 @@ test.describe('Should Search Users By Search Criteria', async () => {
         expect(actualUserInfo[3]).toStrictEqual(data.uniqueFirstNameUser.age.toString());
     })
 
-    test('Search User With Unique First Name - POM', async({ page }) => {
+    test('Search User With Unique First Name - POM', async({ page, forEachTest, createDB }) => {
         const searchTab = page.getByRole('link', {name: 'Search', exact: true});
         const tableRow = page.locator("tbody>tr");
         const firstNamePlaceholder = page.getByPlaceholder("Enter first name...");
@@ -73,9 +66,5 @@ test.describe('Should Search Users By Search Criteria', async () => {
         expect(actualUserInfo[1]).toStrictEqual(data.uniqueFirstNameUser.firstName);
         expect(actualUserInfo[2]).toStrictEqual(data.uniqueFirstNameUser.lastName);
         expect(actualUserInfo[3]).toStrictEqual(data.uniqueFirstNameUser.age.toString());
-    })
-
-    test.afterEach('Close API request context', async () => {
-        await apiRequest.dispose();
     })
 })
