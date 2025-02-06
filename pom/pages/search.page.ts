@@ -1,43 +1,50 @@
-import {Page, Locator, expect} from '@playwright/test'
+import {Page, Locator} from "@playwright/test";
+import {Header} from "@components/header";
+import {Tab} from "@components/tab";
+import {Form} from "@components/form";
+import {step} from "allure-js-commons";
+import {Table} from "@components/table";
 
 export class SearchPage {
+
     private readonly page: Page;
-    private readonly firstNamePlaceholder: Locator;
-    readonly searchButton: Locator;
-    private readonly tableRow: Locator;
+    readonly header: Header;
+    readonly tabs: Tab;
+    readonly searchForm: Form;
+    readonly table: Table;
+    private readonly _searchButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
-        this.firstNamePlaceholder = page.getByPlaceholder("Enter first name...");
-        this.searchButton = page.getByRole('button', { name: 'Search', exact: true })
-        this.tableRow = page.locator("tbody>tr");
+        this.header = new Header(this.page);
+        this.tabs = new Tab(this.page);
+        this.searchForm = new Form(this.page);
+        this.table = new Table(this.page);
+
+        this._searchButton = page.getByRole('button', { name: 'Search', exact: true })
     }
 
-    async inputFirstName(firstName: string) {
-        await this.page.waitForLoadState("networkidle");
-        await expect(this.tableRow.first()).toBeAttached();
-        await expect(this.searchButton).not.toBeEnabled();
-        await this.firstNamePlaceholder.fill(firstName);
+    get searchButton(): Locator {
+        return this._searchButton;
+    }
+
+    async isLoad() {
+        return await step('Wait for the Search Page to load and verify essential elements are visible.\n', async () => {
+            return (await Promise.all([
+                this.page.waitForLoadState("domcontentloaded"),
+                this.table.firstRow.waitFor({state: "attached"}),
+                this.table.firstRow.waitFor({state: "visible"}),
+                this.searchButton.waitFor({state: "visible"})
+            ])).every(result => result !== null);
+        });
     }
 
     async clickSearchButton() {
-        // await Promise.all([
-        //     this.page.waitForResponse("/api/users/"),
-        //     expect(this.searchButton).toBeEnabled().then(r => console.log("1")),
-        //     this.page.click("button").then(r => console.log("2"))
-        // ]);
-
-        await this.page.waitForLoadState("networkidle");
-        await this.searchButton.click()
-
-
+        return await step('Click "Search" button.', async () => {
+            await this._searchButton.click()
+        });
     }
 
-    async getSingleResultInfo() {
-        await this.tableRow.first().hover();
-        await expect(this.tableRow.first()).toBeVisible();
 
-        return await this.tableRow.first().innerText().then(text => text.split("\t"));
-    }
 
 }

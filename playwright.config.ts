@@ -13,14 +13,13 @@ export default defineConfig({
 
   testIgnore: 'template*',
   outputDir:'./reports/test-results',
-  timeout: 10 * 1000,
   expect: {
     timeout: 2 * 1000
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 1,
   reporter: [
     ['list'],
     ['json', { outputFile: 'reports/json-report/report.json' }],
@@ -68,6 +67,7 @@ export default defineConfig({
     {
       name: 'Chromium',
       testMatch: /.*\.test\.ts/,
+      timeout: 10 * 1000,
       use: { ...devices['Desktop Chrome'],
         headless: !!process.env.CI,
       },
@@ -76,6 +76,7 @@ export default defineConfig({
     {
       name: 'FireFox',
       testMatch: /.*\.test\.ts/,
+      timeout: 20 * 1000,
       use: { ...devices['Desktop Firefox'],
         headless: !!process.env.CI,
       },

@@ -1,7 +1,8 @@
 import { Page, Locator } from "@playwright/test";
-import { step } from 'allure-js-commons';
+import { step } from "allure-js-commons";
 
 export class Header {
+
     private readonly page: Page;
     private readonly _h1: Locator;
 
@@ -15,7 +16,7 @@ export class Header {
     }
 
     async h1Text() {
-        return await step("Retrieve H1 header text", async () => {
+        return await step('Retrieve H1 header text.', async () => {
             return await this.h1.innerText();
         });
     }

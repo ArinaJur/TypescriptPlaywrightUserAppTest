@@ -1,1 +1,1 @@
-export const APP_NAME = "Node Express API Server App";
+export const APP_NAME = 'Node Express API Server App';
