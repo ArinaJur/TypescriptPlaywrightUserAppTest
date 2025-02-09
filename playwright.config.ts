@@ -16,10 +16,10 @@ export default defineConfig({
   expect: {
     timeout: 2 * 1000
   },
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : 1,
+  workers: process.env.CI ? 5 : 1,
   reporter: [
     ['list'],
     ['json', { outputFile: 'reports/json-report/report.json' }],

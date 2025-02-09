@@ -1,6 +1,7 @@
-import { test as base } from "@playwright/test";
+import { test as base, expect } from "@playwright/test";
 import { HomePage } from "@pages/home.page";
 import { SearchPage } from "@pages/search.page";
+import {step} from "allure-js-commons";
 
 export type MyPages = {
     homePage: HomePage;
@@ -18,4 +19,3 @@ export const test = base.extend<MyPages>({
 });
 
 export { expect } from '@playwright/test';
-
