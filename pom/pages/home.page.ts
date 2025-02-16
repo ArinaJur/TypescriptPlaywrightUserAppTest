@@ -1,19 +1,19 @@
 import { Page, Locator } from '@playwright/test'
+import {Tab} from "@components/tab";
 
 export class HomePage {
     private readonly page: Page;
-    private readonly searchTab: Locator
+    readonly tab: Tab;
+
 
     constructor(page: Page) {
         this.page = page;
-        this.searchTab = page.getByRole('link', {name: 'Search', exact: true});
+        this.tab = new Tab(this.page);
+
+
     }
 
-    async clickSearchTab() {
-        await this.searchTab.click();
 
-        // return new SearchPage(this.page);
-    }
 
 
 }
