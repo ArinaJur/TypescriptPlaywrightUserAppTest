@@ -18,14 +18,17 @@ export class Form {
 
     async inputFirstName(firstName: string) {
         await Promise.all([
-            this.page.waitForLoadState("domcontentloaded"),
             new Table(this.page).tableRow.first().waitFor({state: 'attached'}),
             this.searchButton.isDisabled(),
             this.firstNamePlaceholder.isVisible(),
+        ])
 
-            this.firstNamePlaceholder.fill(firstName)
+        await Promise.all([
+            this.firstNamePlaceholder.fill(firstName),
+            this.searchButton.isEnabled(),
         ])
     }
+
 
     async clickSearchButton() {
         await Promise.all([
